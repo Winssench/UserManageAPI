@@ -18,21 +18,6 @@ public class OffertestApplication {
 		SpringApplication.run(OffertestApplication.class, args);
 	}
 
-	/*
-	 * 
-	@Override
-	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		UserModel user = repository.findById("2").get();
-		System.out.println("user here "  + user.toString());
-		
-
-	
-		
-
-	}
-	 */
-	
 	
 
 

@@ -25,13 +25,14 @@ Maven 3.0+
 an IDE Eclipse is recommended
 ```
 
-- ### Note : in this project it includes many dependencies, luckily, it is all handeled by Maven for us.
+- Note : in this project it includes many dependencies, luckily, it is all handeled by Maven for us.
+
+#
 
 ## Steps to Setup
 
-A step by step series of examples that tell you how to get a development env running
-
-download Eclipse
+- A step by step series of examples that tell you how to get a development env running
+  download Eclipse
 
 **1. Clone the application**
 
@@ -39,7 +40,7 @@ download Eclipse
 git clone https://github.com/Winssench/UserManageAPI.git
 ```
 
-**2. Import project to Eclipse**
+**2. Import the project to Eclipse**
 
 **2. Embedded Database**
 
@@ -64,6 +65,8 @@ The reference documentation includes detailed installation instructions as well 
 
 <https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/getting-started.html#getting-started.first-application>
 
+#
+
 ## Explore Rest APIs
 
 The app defines following CRUD APIs.
@@ -78,11 +81,11 @@ The app defines following CRUD APIs.
 
 ### Notes:
 
-- ### for the authentification a basic auth is used, the password is in encrypted in the DB.
-- ### since we are using in memory database it is empty at the begining so we have to Sign Up first in order to create user
-- ### the json in the SIgnup must respect the form like for the Email, All the fields are required Except the phone field as well as the gender they are Optional
+- for the authentification a basic auth is used, the password is in encrypted in the DB.
+- since we are using in memory database it is empty at the begining so we have to Sign Up first in order to create user
+- the json in the SIgnup must respect the form like for the Email, All the fields are required Except the phone field as well as the gender they are Optional
 
-  - Only Adult French are allowed to create an account otherwise it will display a message :
+- Only Adult French are allowed to create an account otherwise it will display a message :
 
 ## Sample Valid JSON Request Bodys
 
@@ -111,8 +114,8 @@ The app defines following CRUD APIs.
 
 ### Notes:
 
-- ### the following route is protected using Spring Security (only Logged in users are allowed)
-- ### it displays the detail of a registered User by Email
+- the following route is protected using Spring Security (only Logged in users are allowed)
+- it displays the detail of a registered User by Email
 
 #
 
@@ -126,5 +129,5 @@ The app defines following CRUD APIs.
 
 ## Acknowledgments
 
-- Thanks to everyone who works to develop [SpringBoot](https://spring.io/) .
+- Thanks to everyone who works to develop Spring [SpringBoot](https://spring.io/) .
 - Template used Billie Thompson -
