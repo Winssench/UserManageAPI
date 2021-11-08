@@ -45,5 +45,19 @@ public class UserService implements UserDetailsService{
 		
 		return "it Works";
 	}
+	/*
+	 * this method is same as Signup without the encryption part 
+	 * for testing purpose
+	 */
+	public void addUser(UserModel user)
+	{
+		boolean userExist = userepository.findByEmail(user.getEmail())
+				.isPresent();
+		if(userExist)
+			throw new IllegalStateException("Email " + user.getEmail() + " taken");
+		
+		userepository.save(user);
+	
+	}
 
 }

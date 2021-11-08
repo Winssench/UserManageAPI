@@ -3,6 +3,8 @@ package com.airFrance.offertest.registration;
 import java.time.LocalDate;
 import java.time.Period;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.airFrance.offertest.model.AppUserRole;
@@ -18,7 +20,7 @@ public class RegistrationService {
 	private final UserService userService;
 
 	
-	public String register(RegistrationRequest request) {
+	public ResponseEntity<String> register(RegistrationRequest request) {
 	
 		boolean isFrance = request.getCountry().equals("France");
 		
@@ -35,7 +37,7 @@ public class RegistrationService {
 		}
 		
 		
-		return userService.signUpUser(
+		String msg = userService.signUpUser(
 				new UserModel(
 						 request.getEmail(),request.getPassword(), request.getFirstName() , request.getLastName() , 
 						 AppUserRole.USER, request.getGender(), request.getPhoneNumber(),
@@ -43,6 +45,7 @@ public class RegistrationService {
 						 
 						)
 		);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 }
