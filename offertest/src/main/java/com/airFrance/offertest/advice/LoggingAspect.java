@@ -24,8 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  
 //import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+
 @Aspect
 @Configuration
 public class LoggingAspect {
