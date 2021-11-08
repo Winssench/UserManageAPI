@@ -13,39 +13,39 @@ import com.airFrance.offertest.service.UserService;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * THis class implements the User Service and its functionalities
+ * 
+ * @author chichaouiomar
+ *
+ */
 @Service
 @AllArgsConstructor
 public class RegistrationService {
 
 	private final UserService userService;
 
-	
 	public ResponseEntity<String> register(RegistrationRequest request) {
-	
+
 		boolean isFrance = request.getCountry().equals("France");
-		
-		//for calcualting the age
+
 		LocalDate today = LocalDate.now();
 		LocalDate birthday = request.getBirthday();
 		Period p = Period.between(birthday, today);
-		
-		boolean isAdult = p.getYears() >= 18 ;
-		
-		if(!(isAdult && isFrance))
-		{
+
+		boolean isAdult = p.getYears() >= 18;
+
+		if (!(isAdult && isFrance)) {
 			throw new IllegalStateException("Only adult French residents are allowed to create an account!");
 		}
-		
-		
-		String msg = userService.signUpUser(
-				new UserModel(
-						 request.getEmail(),request.getPassword(), request.getFirstName() , request.getLastName() , 
-						 AppUserRole.USER, request.getGender(), request.getPhoneNumber(),
-						 request.getCountry(), request.getBirthday()
-						 
-						)
-		);
-		return new ResponseEntity<String>(HttpStatus.OK);
+
+		String msg = userService.signUpUser(new UserModel(request.getEmail(), request.getPassword(),
+				request.getFirstName(), request.getLastName(), AppUserRole.USER, request.getGender(),
+				request.getPhoneNumber(), request.getCountry(), request.getBirthday()
+
+		));
+
+		return ResponseEntity.status(HttpStatus.OK).body(msg);
 	}
 
 }

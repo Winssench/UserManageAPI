@@ -42,13 +42,10 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-
-
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-
 
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -61,14 +58,16 @@ import org.springframework.boot.web.server.LocalServerPort;
 
 import static org.springframework.boot.test.context.SpringBootTest.*;
 
-@SpringBootTest(
-		 webEnvironment = WebEnvironment.RANDOM_PORT,
-			  properties = {
-			  "spring.security.user.name=omar",
-			  "spring.security.user.password=pass",
-			  
-			}
-)
+
+/**
+ * This represents the Integration Tests for the API
+ * @author chichaouiomar
+ *
+ */
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = { "spring.security.user.name=omar",
+		"spring.security.user.password=pass",
+
+})
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureTestDatabase(replace = Replace.ANY)
@@ -80,16 +79,11 @@ public class UserIt {
 	@Autowired
 	private UserRepository userRepo;
 
-	// @Autowired
-	// private UserService userService;
-	  @LocalServerPort
-	  private Integer port;
+	@LocalServerPort
+	private Integer port;
 
 	@Autowired
 	private ObjectMapper objectMapper;
-
-	// @Autowired
-	// private TestRestTemplate template;
 
 	@BeforeEach
 	void setUp() {
@@ -100,7 +94,6 @@ public class UserIt {
 	void canRegisternNewUser() throws Exception {
 		// given
 		String email = "pierre@gmail.com";
-		String password = null;
 		UserModel user = new UserModel(email, "pass", "Pierre", "Dupont", AppUserRole.USER, Gender.MALE, "0687345465",
 				"France", LocalDate.of(2000, 9, 12));
 		// when
@@ -126,15 +119,10 @@ public class UserIt {
 		UserModel user = new UserModel(email, "pass", "Pierre", "Dupont", AppUserRole.USER, Gender.MALE, "0687345465",
 				"France", LocalDate.of(2000, 9, 12));
 		user.setPassword(password);
-		// first we persist the user in the memory database
 		userRepo.save(user);
-		RestAssuredMockMvc
-		.given()
-		.auth().none()
-		.param("email", email).when().get("/userDetail").then()
-		.statusCode(401);
+		RestAssuredMockMvc.given().auth().none().param("email", email).when().get("/userDetail").then().statusCode(401);
 	}
-	
+
 	@Test
 	void getUserDetailOnceAuthenticated() {
 		String email = "pierre@gmail.com";
@@ -142,23 +130,12 @@ public class UserIt {
 		UserModel user = new UserModel(email, "pass", "Pierre", "Dupont", AppUserRole.USER, Gender.MALE, "0687345465",
 				"France", LocalDate.of(2000, 9, 12));
 		user.setPassword(password);
-		// first we persist the user in the memory database
 		userRepo.save(user);
-		//RestAssuredMockMvc
-		RestAssured
-		.given()
-		.filter(new RequestLoggingFilter())
-		.auth()
-		.basic("omar", "pass")
-		//.auth().with(user("omar"))
-		//.auth().with(SecurityMockMvcRequestPostProcessors.user("duke"))
-		//.auth().with(SecurityMockMvcRequestPostProcessors.user("omar"))
-		.contentType("application/json")
-		.param("email", email).when()
-		//"http://localhost:" + port + "/api/books"
-		.get("http://localhost:" + port +"/userDetail").then()
-		.statusCode(201);
-		
+		RestAssured.given().filter(new RequestLoggingFilter()).auth().basic("omar", "pass")
+
+				.contentType("application/json").param("email", email).when()
+				.get("http://localhost:" + port + "/userDetail").then().statusCode(201);
+
 	}
 
 }

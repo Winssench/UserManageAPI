@@ -1,3 +1,6 @@
+/*
+ * this is responsible for all the logging
+ */
 package com.airFrance.offertest.advice;
 
 
@@ -9,17 +12,14 @@ import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
+
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.Configuration;
 
 
  
-//import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 
 @Aspect

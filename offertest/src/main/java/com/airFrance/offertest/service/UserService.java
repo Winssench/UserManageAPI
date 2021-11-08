@@ -11,53 +11,55 @@ import com.airFrance.offertest.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
 
-
+/**
+ * 
+ * @author chichaouiomar
+ *
+ */
 @Service
 @AllArgsConstructor
-public class UserService implements UserDetailsService{
-	
+public class UserService implements UserDetailsService {
+
 	private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
 	private final UserRepository userepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		return userepository.findByEmail(email).orElseThrow(() -> 
-			new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
+		return userepository.findByEmail(email)
+				.orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
 	}
-	
-	
-	public String signUpUser(UserModel user)
-	{
-		boolean userExist = userepository.findByEmail(user.getEmail())
-					.isPresent();
-		if(userExist)
+
+	/**
+	 * this Method creates new user Once Valid and persist it to the database
+	 * @param user
+	 * @return
+	 */
+	public String signUpUser(UserModel user) {
+		boolean userExist = userepository.findByEmail(user.getEmail()).isPresent();
+		if (userExist)
 			throw new IllegalStateException("email already taken");
-		
+
 		String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-		
+
 		user.setPassword(encodedPassword);
-		
+
 		userepository.save(user);
-		
-		// TODO: Send Cnfirmation token 
-		
+
 		return "it Works";
 	}
+
 	/*
-	 * this method is same as Signup without the encryption part 
-	 * for testing purpose
+	 * this method is same as Signup without the encryption part for testing purpose
 	 */
-	public void addUser(UserModel user)
-	{
-		boolean userExist = userepository.findByEmail(user.getEmail())
-				.isPresent();
-		if(userExist)
+	public void addUser(UserModel user) {
+		boolean userExist = userepository.findByEmail(user.getEmail()).isPresent();
+		if (userExist)
 			throw new IllegalStateException("Email " + user.getEmail() + " taken");
-		
+
 		userepository.save(user);
-	
+
 	}
 
 }

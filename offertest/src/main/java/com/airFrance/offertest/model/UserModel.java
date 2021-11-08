@@ -1,3 +1,6 @@
+/*
+ * Model of the User 
+ */
 package com.airFrance.offertest.model;
 
 import java.time.LocalDate;
@@ -25,60 +28,50 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * @author chichaouiomar
+ *
+ */
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "USER_TBL")
-public class UserModel implements UserDetails 
-{
+public class UserModel implements UserDetails {
 	@Id
-	@SequenceGenerator(
-			name = "user_sequence",
-			sequenceName = "user_sequence",
-			allocationSize = 1
-	)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "user_sequence"
-	)
+	@SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
 	private Long uid;
-	
-	
+
 	@NotEmpty
 	@Email
 	private String email;
-	
+
 	@NotEmpty
-	//@Size(min = 5, message = "password should have at least 5 characters")
 	private String password;
-	
+
 	@NotEmpty
-	@Size(min = 2, message= "user name should have at least 2 characters")
+	@Size(min = 2, message = "user name should have at least 2 characters")
 	private String firstName;
-	
+
 	@NotEmpty
-	@Size(min = 2, message= "user lastname should have at least 2 characters")
+	@Size(min = 2, message = "user lastname should have at least 2 characters")
 	private String lastName;
-	
+
 	@Enumerated(EnumType.STRING)
 	private AppUserRole appUserRole;
-	
+
 	@Past
 	private LocalDate birthday;
 	@NotEmpty
 	private String country;
-	
+
 	private String phoneNumber;
-	
-	
-	
-	
+
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
-
-
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -87,59 +80,52 @@ public class UserModel implements UserDetails
 		return Collections.singletonList(authority);
 	}
 
-
-
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return this.password;
 	}
 
-
-
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
-
-
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
-
-
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
-
-
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
+
 		return true;
 	}
 
-
-
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return this.email;
 	}
 
-	
-
-
-	public UserModel(String email, String password, String firstName, String lastName, AppUserRole appUserRole, Gender gender
-				, String phoneNumber, String country, LocalDate birthday) {
+	/**
+	 * This constructs a User from the data we get from the 
+	 * user for example
+	 * @param email
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param appUserRole
+	 * @param gender
+	 * @param phoneNumber
+	 * @param country
+	 * @param birthday
+	 */
+	public UserModel(String email, String password, String firstName, String lastName, AppUserRole appUserRole,
+			Gender gender, String phoneNumber, String country, LocalDate birthday) {
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
@@ -150,6 +136,5 @@ public class UserModel implements UserDetails
 		this.phoneNumber = phoneNumber;
 		this.appUserRole = appUserRole;
 	}
-	
-	
+
 }
