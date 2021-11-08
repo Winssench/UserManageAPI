@@ -3,6 +3,7 @@ package com.airFrance.offertest.registration;
 import java.time.LocalDate;
 import java.time.Period;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RegistrationService {
 
+	
 	private final UserService userService;
 
 	public ResponseEntity<String> register(RegistrationRequest request) {

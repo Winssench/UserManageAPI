@@ -117,6 +117,10 @@ The app defines following CRUD APIs.
 - the following route is protected using Spring Security (only Logged in users are allowed)
 - it displays the detail of a registered User by Email
 
+for Request samples :
+
+- [https://documenter.getpostman.com/view/18039303/UVC3koLz]
+
 #
 
 ## IDE

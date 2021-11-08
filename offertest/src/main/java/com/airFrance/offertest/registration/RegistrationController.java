@@ -2,6 +2,9 @@ package com.airFrance.offertest.registration;
 
 import javax.validation.Valid;
 
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +24,8 @@ public class RegistrationController {
 	
 	@PostMapping
 	public ResponseEntity<String> register(@Valid @RequestBody RegistrationRequest request) {
+		
 		return registrationService.register(request);
+		
 	}
 }
