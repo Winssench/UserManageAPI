@@ -26,7 +26,14 @@ public class RegistrationService {
 
 	
 	private final UserService userService;
+	
 
+	/**
+	 * 
+	 * @param request
+	 * @return {@link ResponseEntity}
+	 * @exception IllegalStateException
+	 */
 	public ResponseEntity<String> register(RegistrationRequest request) {
 
 		boolean isFrance = request.getCountry().equals("France");

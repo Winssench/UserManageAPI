@@ -9,6 +9,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+
+/**
+ * this represents the registration request object coming from the user 
+ * @author chichaouiomar
+ *
+ */
+
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode

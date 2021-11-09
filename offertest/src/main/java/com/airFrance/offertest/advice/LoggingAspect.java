@@ -18,35 +18,32 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-/*
-
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+/**
+ * this is represents  the Logging interceptor for each method
+ * @author chichaouiomar
+ *
  */
 
 @Aspect
-//@Configuration
 @Component
 public class LoggingAspect {
 
 	private static final Logger logger = LogManager.getLogger(LoggingAspect.class);
 
+	/**
+	 * this indicate for the logging Interceptor where to look
+	 */
 	@Pointcut(value = "execution(* com.airFrance.offertest.*.*.*(..) )")
 	public void myPointcut() {
 
 	}
 
+	/**
+	 * Search in all the api layers and provide the loggs for the request and the response
+	 * @param joinpoint
+	 * @return Object
+	 * @throws Throwable
+	 */
 	@Around("myPointcut()")
 	public Object logAround(ProceedingJoinPoint joinpoint) throws Throwable {
 

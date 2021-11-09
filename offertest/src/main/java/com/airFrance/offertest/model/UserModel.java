@@ -1,6 +1,4 @@
-/*
- * Model of the User 
- */
+
 package com.airFrance.offertest.model;
 
 import java.time.LocalDate;
@@ -29,8 +27,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * This class represents the Model for the User
  * 
  * @author chichaouiomar
+ * @version 1.0
  *
  */
 
@@ -73,6 +73,9 @@ public class UserModel implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
+	/**
+	 * @see #getAuthorities()
+	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -80,40 +83,62 @@ public class UserModel implements UserDetails {
 		return Collections.singletonList(authority);
 	}
 
+	/**
+	 * @see UserModel#getPassword()
+	 */
 	@Override
 	public String getPassword() {
 		return this.password;
 	}
 
+	/**
+	 * @see UserModel#isAccountNonExpired()
+	 */
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
+	/**
+	 * @see #isAccountNonLocked()
+	 */
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
+	/**
+	 * @see #isCredentialsNonExpired()
+	 */
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
+	/**
+	 * later if you want to enable user for example if we activate 
+	 * email verification later
+	 * 
+	 * @see #isEnabled()
+	 */
 	@Override
 	public boolean isEnabled() {
 
 		return true;
 	}
 
+	/**
+	 * 
+	 * @see #getUsername()
+	 */
 	@Override
 	public String getUsername() {
 		return this.email;
 	}
 
 	/**
-	 * This constructs a User from the data we get from the 
-	 * user for example
+	 * This instantiate a User from the data we get from the 
+	 * user 
 	 * @param email
 	 * @param password
 	 * @param firstName

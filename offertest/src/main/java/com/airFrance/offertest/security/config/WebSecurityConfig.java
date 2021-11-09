@@ -32,6 +32,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private final UserService userService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	/**
+	 * @see @see {@link WebSecurityConfig#configure(HttpSecurity)}
+	 * @param HttpSecurity
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -52,11 +56,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 
+	/**
+	 * @see WebSecurityConfig#configure(AuthenticationManagerBuilder)
+	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(daoAuthenticationProvider());
 	}
 
+	/**
+	 * @see WebSecurityConfig#daoAuthenticationProvider()
+	 * @return DaoAuthenticationProvider
+	 */
 	@Bean
 	public DaoAuthenticationProvider daoAuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();

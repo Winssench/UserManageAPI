@@ -11,6 +11,7 @@ import com.airFrance.offertest.model.UserModel;
 /**
  * this Class represents the DAO implementation for the User Data
  * @author chichaouiomar
+ * @version 1.0
  *
  */
 @Repository

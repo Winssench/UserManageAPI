@@ -1,7 +1,5 @@
 package com.airFrance.offertest.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.airFrance.offertest.model.UserModel;
 import com.airFrance.offertest.repository.UserRepository;
-import com.airFrance.offertest.security.PasswordEncoder;
 
 import lombok.AllArgsConstructor;
 
@@ -25,10 +22,14 @@ public class UserService implements UserDetailsService {
 
 	private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
 	private final UserRepository userepository;
-	
 
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	/**
+	 * @see UserDetailsService#loadUserByUsername(String)
+	 * @param String
+	 * 
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
@@ -38,8 +39,9 @@ public class UserService implements UserDetailsService {
 
 	/**
 	 * this Method creates new user Once Valid and persist it to the database
+	 * 
 	 * @param user
-	 * @return
+	 * @return String
 	 */
 	public String signUpUser(UserModel user) {
 		boolean userExist = userepository.findByEmail(user.getEmail()).isPresent();
@@ -47,7 +49,6 @@ public class UserService implements UserDetailsService {
 			throw new IllegalStateException("email already taken");
 
 		String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-		//String encodedPassword = passwordEncoder().encode(user.getPassword());
 
 		user.setPassword(encodedPassword);
 

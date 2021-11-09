@@ -17,18 +17,34 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
+/**
+ * this class represents the Exception Handler of the application
+ * @author chichaouiomar
+ * 
+ *
+ */
 @ControllerAdvice
 public class ValidationHandler extends ResponseEntityExceptionHandler{
 	
 	
 
-	
+	/**
+	 * 
+	 * @param illegalexcpetion
+	 * @return {@link ResponseEntity}
+	 */
 	@ExceptionHandler
 	protected ResponseEntity<String> handleIllggal(IllegalStateException illegalexcpetion)
 	{
 		return new ResponseEntity<String>("Only adult French residents are allowed to create an account!", HttpStatus.BAD_REQUEST);
 	}
 	
+	/**
+	 * 
+	 * @see #handleConstrraint(ConstraintViolationException)
+	 * 
+	 * @return {@link ResponseEntity}
+	 */
 	@ExceptionHandler
 	protected ResponseEntity<Object> handleConstrraint(ConstraintViolationException cve)
 	{

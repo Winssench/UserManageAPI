@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 
+
+/**
+ * This controller enable user sign up
+ * @author chichaouiomar
+ *
+ */
 @RestController
 @RequestMapping(path = "api/v1/registration")
 @AllArgsConstructor
@@ -22,6 +28,11 @@ public class RegistrationController {
 	private RegistrationService registrationService;
 	
 	
+	/**
+	 * enable regirstration via this method
+	 * @param request
+	 * @return {@link ResponseEntity}
+	 */
 	@PostMapping
 	public ResponseEntity<String> register(@Valid @RequestBody RegistrationRequest request) {
 		
